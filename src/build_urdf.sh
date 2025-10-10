@@ -105,15 +105,16 @@ echo "==================================="
 echo "Copying mesh files..."
 echo "==================================="
 mkdir -p ${OUTPUT_DIR}/meshes
-cp -r src/Universal_Robots_ROS2_Description/meshes/* ${OUTPUT_DIR}/meshes/
-cp -r src/robotiq_hande_description/meshes/* ${OUTPUT_DIR}/meshes/
+mkdir -p ${OUTPUT_DIR}/meshes/hande
+cp -r src/Universal_Robots_ROS2_Description/meshes/ur10e ${OUTPUT_DIR}/meshes/
+cp -r src/robotiq_hande_description/meshes/* ${OUTPUT_DIR}/meshes/hande/
 
 # Update mesh paths in URDFs to be relative
-echo "Updating mesh paths to relative paths..."
-sed -i 's|package://meshes/|meshes/|g' ${OUTPUT_DIR}/ur10e_base.urdf
-sed -i 's|package://robotiq_hande_description/meshes/|meshes/|g' ${OUTPUT_DIR}/hand_e_gripper.urdf
-sed -i 's|package://meshes/|meshes/|g' ${OUTPUT_DIR}/ur10e_with_hande.urdf
-sed -i 's|package://robotiq_hande_description/meshes/|meshes/|g' ${OUTPUT_DIR}/ur10e_with_hande.urdf
+# echo "Updating mesh paths to relative paths..."
+sed -i 's|package://ur_description/meshes/|meshes/|g' ${OUTPUT_DIR}/ur10e_base.urdf
+sed -i 's|package://robotiq_hande_description/meshes/|meshes/hande/|g' ${OUTPUT_DIR}/hand_e_gripper.urdf
+sed -i 's|package://ur_description/meshes/|meshes/|g' ${OUTPUT_DIR}/ur10e_with_hande.urdf
+sed -i 's|package://robotiq_hande_description/meshes/|meshes/hande/|g' ${OUTPUT_DIR}/ur10e_with_hande.urdf
 
 echo "==================================="
 echo "Build complete! Files available in ${OUTPUT_DIR}"
