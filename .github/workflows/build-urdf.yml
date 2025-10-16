@@ -1,0 +1,46 @@
+name: Build and Publish URDF
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t ur10e-urdf-builder .
+
+      - name: Generate URDF files
+        run: |
+          docker run --rm \
+            -v $(pwd)/out:/workspace/out \
+            ur10e-urdf-builder
+
+      - name: Upload URDF artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: urdf-files
+          path: out/
+
+      - name: Create Release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: latest
+          name: URDF
+          files: out/*
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
