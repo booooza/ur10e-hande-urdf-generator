@@ -11,3 +11,7 @@ Based on:
 
 Prerequisites:
 * Docker
+
+## Acknowledgements
+
+This work was conducted as part of a semester project in the [Master of Science in Engineering (Data Science)](https://www.zhaw.ch/en/engineering/study/masters-degree-programme/profiles/data-science) programme at the [ZHAW School of Engineering](https://www.zhaw.ch/en/engineering), [Centre for Artificial Intelligence (CAI)](https://www.zhaw.ch/en/engineering/institutes-centres/cai), [Industrial Artificial Intelligence Group](https://www.zhaw.ch/en/engineering/institutes-centres/cai/industrial-artificial-intelligence-group), supervised by Prof. Dr. Alisa Rupenyan-Vasileva and Dr. Deepak Ingole.
